@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fffaf0;
+        }
+        .header {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-family: 'Pacifico', cursive, sans-serif;
+            font-size: 42px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff5e62;
+            margin: 20px 0;
+        }
+        .button {
+            margin: 20px;
+            text-align: center;
+        }
+        .button a {
+            background-color: #ff5e62;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .button a:hover {
+            background-color: #ff9966;
+        }
+        .table-container {
+            max-width: 90%;
+            margin: 20px auto;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 70vh;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f8c4c4;
+            color: #333;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #fff2f2;
+        }
+        table tbody tr:nth-child(odd) {
+            background-color: #ffe6e6;
+        }
+        table tbody tr:hover {
+            background-color: #ffcccc;
+        }
+        .nested-table {
+            width: 100%;
+            border: none;
+        }
+        .nested-table th, .nested-table td {
+            font-size: 14px;
+            padding: 4px 8px;
+        }
+        .nested-table th {
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+<div class="header">CandyCo Orders</div>
+<div class="button">
+    <a href="/customers">View Customer details</a>
+</div>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Total Price</th>
+            <th>Shipped</th>
+            <th>Products</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.customer != null ? order.customer.name : 'N/A'}">Customer Name</td>
+            <td th:text="${order.totalPrice}">Total Price</td>
+            <td th:text="${order.shipped}">Shipped</td>
+            <td>
+                <table class="nested-table">
+                    <thead>
+                    <tr>
+                        <th>Product Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${order.products}">
+                        <td th:text="${product.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

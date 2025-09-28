@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: CandyCo
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: appuser
+    password: pirate
+  server:
+    error:
+      include-message: always
+      whitelabel:
+        enabled: false
